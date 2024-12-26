@@ -19,3 +19,11 @@ Ao analisar, vemos que é uma página estática que apresenta uma seção de res
 
 ![image](https://github.com/user-attachments/assets/7e84e956-e84d-4a80-9653-b862a0f5b5f1)
 
+na seção de contato, tem um email com o thetoppers.htb
+
+![image](https://github.com/user-attachments/assets/fe4d2007-055e-4fa2-8580-869499186be5)
+
+Se acionarmos no /etc/host junto com o ip podemos acessar. O arquivo /etc/hosts é usado para mapear nomes de domínio para endereços ip. Por padrão, esse arquivo é consultado antes do servidor DNS para resolver nomes
+
+![image](https://github.com/user-attachments/assets/30c8d250-177c-4da5-bb21-9e1cbb6037dd)
+
