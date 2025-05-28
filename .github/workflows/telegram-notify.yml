@@ -1,0 +1,22 @@
+name: Telegram Notification
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.event_name }} in ${{ github.repository }}!
+            Commit: ${{ github.event.head_commit.message || github.event.pull_request.title }}
+            Author: ${{ github.actor }}
+            Link: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
