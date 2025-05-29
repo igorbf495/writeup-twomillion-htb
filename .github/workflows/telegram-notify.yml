@@ -5,6 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     types: [ opened, synchronize, reopened ]
+  issues:
+    types: [ opened, edited, closed ]
 
 jobs:
   notify:
@@ -17,6 +19,6 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
             ${{ github.event_name }} in ${{ github.repository }}!
-            Commit: ${{ github.event.head_commit.message || github.event.pull_request.title }}
+            ${{ github.event_name == 'issues' && format('Issue #{0}: {1}\nStatus: {2}', github.event.issue.number, github.event.issue.title, github.event.action) || github.event_name == 'pull_request' && format('PR #{0}: {1}', github.event.pull_request.number, github.event.pull_request.title) || format('Commit: {0}', github.event.head_commit.message) }}
             Author: ${{ github.actor }}
-            Link: ${{ github.event.pull_request.html_url || github.event.head_commit.url }}
+            Link: ${{ github.event.issue.html_url || github.event.pull_request.html_url || github.event.head_commit.url }}
